@@ -1,5 +1,18 @@
 <script lang="ts">
 	import '$lib/styles/app.scss';
+
+	let newTask = '';
+	let Task: { Nazwa: string; status: boolean }[] = [];
+
+	const addNewTask = () => {
+		if (Task[0] != undefined) {
+			Task = [...Task, { Nazwa: newTask, status: false }];
+			newTask = '';
+		} else {
+			Task = [{ Nazwa: newTask, status: false }];
+			newTask = '';
+		}
+	};
 </script>
 
 <section>
@@ -7,6 +20,19 @@
 		<h1>To Do List</h1>
 	</div>
 </section>
+
+<div class="inputText">
+	<input bind:value={newTask} type="text" placeholder="Dodaj Nowe Zadania..." />
+	<button on:click={addNewTask}> Dodaj</button>
+</div>
+
+<div>
+	{#each Task as tasks, i}
+		<div>
+			{tasks.Nazwa}
+		</div>
+	{/each}
+</div>
 
 <style lang="scss">
 	h1 {
