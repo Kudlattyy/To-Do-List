@@ -3,43 +3,75 @@
 </script>
 
 <section>
-	<div>
-		<h1>To Do List</h1>
+	<div class="Main">
+		<div class="Left-Panel">Menu</div>
+		<div class="Right-Panel">
+			<div class="Wall-Tittle">PlaceHolder</div>
+			<div class="Wall">
+				<div class="Stickers">
+					<div>1</div>
+					<div>2</div>
+					<div>3</div>
+					<div>4</div>
+					<div>5</div>
+					<div>6</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </section>
 
-<style lang="scss">
-	h1 {
-		font-size: 5rem;
-		font-family: 'Anton', sans-serif;
-		-webkit-text-stroke: 1px #435fff;
-		text-transform: uppercase;
-		animation: test 1s;
-		margin: 0;
-	}
-
-	.Test {
-		display: flex;
-		justify-content: center;
-		justify-content: space-around;
-		div {
-			padding: 10px;
-			border: solid 2px #fff;
-			background-color: grey;
-		}
-	}
-
+<style>
 	section {
-		display: flex;
-		justify-content: center;
+		width: 100%;
+		height: 100%;
+		display: grid;
+		place-items: center;
 	}
 
-	@keyframes test {
-		from {
-			transform: translateY(400px);
-		}
-		to {
-			transform: translateY(0vh);
-		}
+	.Main {
+		background-color: #fafafa;
+		height: 750px;
+		width: 75%;
+		box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
+		border-radius: 10px;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.Left-Panel {
+		height: 725px;
+		width: 15%;
+		background-color: #f4f4f4;
+		margin: 15px;
+		border-radius: 10px;
+	}
+
+	.Right-Panel {
+		width: 82%;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.Wall-Tittle {
+		height: 100px;
+		width: 99%;
+		background-color: #f4f4f4;
+		margin-top: 18px;
+		border-radius: 10px;
+	}
+
+	.Wall {
+		height: 600px;
+		width: 99%;
+		border: #efefef 2px solid;
+		border-radius: 10px;
+	}
+
+	.Stickers {
+		display: grid;
+		place-items: center;
+		grid-template-columns: 33% 33% 33%;
+		grid-template-rows: minmax(350px, auto);
 	}
 </style>
