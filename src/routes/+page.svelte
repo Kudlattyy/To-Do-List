@@ -1,27 +1,53 @@
 <script lang="ts">
 	import '$lib/styles/app.scss';
+	import { scale } from 'svelte/transition';
+
+	let boolean = false;
+	function OpenMenuAddNewTask() {
+		boolean = true;
+	}
+
+	function Sumbit() {
+		todoList = [...todoList, { Text: newItem }];
+		newItem = '';
+		boolean = false;
+	}
+
+	let newItem = '';
+
+	let todoList: any = [];
 </script>
 
 <section>
+	{#if boolean}
+		<div class="OffBackground" transition:scale={{ delay: 500, duration: 500 }}>
+			<div class="Adding">
+				<input bind:value={newItem} type="text" placeholder="Name of your task:  " />
+				<button on:click={Sumbit} />
+			</div>
+		</div>
+	{/if}
+
 	<div class="Main">
-		<div class="Left-Panel">Menu</div>
+		<div class="Left-Panel">
+			<button class="AddNewTask" on:click={OpenMenuAddNewTask}> Add New Task</button>
+		</div>
 		<div class="Right-Panel">
-			<div class="Wall-Tittle">PlaceHolder</div>
+			<div class="Wall-Tittle">To Do List</div>
 			<div class="Wall">
 				<div class="Stickers">
-					<div>1</div>
-					<div>2</div>
-					<div>3</div>
-					<div>4</div>
-					<div>5</div>
-					<div>6</div>
+					{#each todoList as item, index}
+						<div>{item.Text}</div>
+					{/each}
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<style>
+<style lang="scss">
+	@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 	section {
 		width: 100%;
 		height: 100%;
@@ -45,6 +71,12 @@
 		background-color: #f4f4f4;
 		margin: 15px;
 		border-radius: 10px;
+		display: flex;
+		justify-content: center;
+		.AddNewTask {
+			width: 75%;
+			height: 40px;
+		}
 	}
 
 	.Right-Panel {
@@ -59,6 +91,12 @@
 		background-color: #f4f4f4;
 		margin-top: 18px;
 		border-radius: 10px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-family: 'Anton', sans-serif;
+		color: #3b93f6;
+		font-size: 3rem;
 	}
 
 	.Wall {
@@ -73,5 +111,20 @@
 		place-items: center;
 		grid-template-columns: 33% 33% 33%;
 		grid-template-rows: minmax(350px, auto);
+	}
+
+	.OffBackground {
+		width: 100vw;
+		height: 100vh;
+		background-color: rgba(82, 82, 82, 0.318);
+		position: absolute;
+		z-index: 2;
+		display: grid;
+		place-items: center;
+		.Adding {
+			width: 25%;
+			height: 700px;
+			background-color: #efefef;
+		}
 	}
 </style>
