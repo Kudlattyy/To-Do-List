@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '$lib/styles/app.scss';
-	import { scale } from 'svelte/transition';
+	import { scale,fly } from 'svelte/transition';
 
 	let boolean = false;
 	function OpenMenuAddNewTask() {
@@ -20,10 +20,10 @@
 
 <section>
 	{#if boolean}
-		<div class="OffBackground" transition:scale={{ delay: 500, duration: 500 }}>
+		<div class="OffBackground" transition:fly={{ delay: 500, duration: 500}}>
 			<div class="Adding">
 				<input bind:value={newItem} type="text" placeholder="Name of your task:  " />
-				<button on:click={Sumbit} />
+				<button class="sumbit" on:click={Sumbit}> Add New </button>
 			</div>
 		</div>
 	{/if}
@@ -47,6 +47,7 @@
 
 <style lang="scss">
 	@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&display=swap');
 
 	section {
 		width: 100%;
@@ -76,6 +77,9 @@
 		.AddNewTask {
 			width: 75%;
 			height: 40px;
+			background-color: #3b93f6;
+			border-radius: 10px;
+			font-family: 'Merriweather Sans', sans-serif;
 		}
 	}
 
@@ -125,6 +129,23 @@
 			width: 25%;
 			height: 700px;
 			background-color: #efefef;
+			display: flex;
+			justify-content: center;
+			justify-content: space-around;
+			Input {
+				width: 75%;
+				height: 50px;
+				margin-top: 25px;
+			}
+			.sumbit {
+				margin-top: 25px;
+				width: 20%;
+				height: 50px;
+				background-color: green;
+				font-family: 'Merriweather Sans', sans-serif;
+				color: floralwhite;
+				border-radius: 10px;
+			}
 		}
 	}
 </style>
