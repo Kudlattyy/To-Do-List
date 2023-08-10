@@ -1,0 +1,29 @@
+
+	let newTask = '';
+	let Task: { Nazwa: string; status: boolean }[] = [];
+
+	const addNewTask = () => {
+		if (Task[0] != undefined) {
+			Task = [...Task, { Nazwa: newTask, status: false }];
+			newTask = '';
+		} else {
+			Task = [{ Nazwa: newTask, status: false }];
+			newTask = '';
+		}
+	};
+
+
+
+<div class="inputText">
+	<input bind:value={newTask} type="text" placeholder="Dodaj Nowe Zadania..." />
+	<button on:click={addNewTask}> Dodaj</button>
+</div>
+
+
+<div class="test">
+	{#each Task as tasks, i}
+		<div>
+			{tasks.Nazwa}
+		</div>
+	{/each}
+</div>
