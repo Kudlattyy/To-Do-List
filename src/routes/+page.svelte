@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '$lib/styles/app.scss';
-	import { scale,fly } from 'svelte/transition';
+	import { scale, fly } from 'svelte/transition';
 
 	let boolean = false;
 	function OpenMenuAddNewTask() {
@@ -8,7 +8,7 @@
 	}
 
 	function Sumbit() {
-		todoList = [...todoList, { Text: newItem }];
+		todoList = [...todoList, { Text: newItem, status: false }];
 		newItem = '';
 		boolean = false;
 	}
@@ -16,11 +16,16 @@
 	let newItem = '';
 
 	let todoList: any = [];
+
+	function removeTasks(index: number) {
+		todoList.splice(index, 1);
+		todoList = todoList;
+	}
 </script>
 
 <section>
 	{#if boolean}
-		<div class="OffBackground" transition:fly={{ delay: 500, duration: 500}}>
+		<div class="OffBackground" transition:fly={{ delay: 500, duration: 500 }}>
 			<div class="Adding">
 				<input bind:value={newItem} type="text" placeholder="Name of your task:  " />
 				<button class="sumbit" on:click={Sumbit}> Add New </button>
@@ -37,7 +42,11 @@
 			<div class="Wall">
 				<div class="Stickers">
 					{#each todoList as item, index}
-						<div>{item.Text}</div>
+						<div>
+							<input bind:checked={item.status} type="checkbox" />
+							<div class:checked={item.status}>{item.Text}</div>
+							<span on:click={() => removeTasks(index)}>❌</span>
+						</div>
 					{/each}
 				</div>
 			</div>
@@ -54,6 +63,10 @@
 		height: 100%;
 		display: grid;
 		place-items: center;
+	}
+
+	.checked {
+		text-decoration: line-through;
 	}
 
 	.Main {
